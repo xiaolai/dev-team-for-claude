@@ -1,0 +1,18 @@
+{
+  "name": "dev-team",
+  "version": "0.1.0",
+  "description": "An agentic dev team installed per project: scout, planner, tester, coder, auditor (Claude or Codex), releaser and consultant, each with its own context, tools, model and effort, customised to the repo through a reviewed profile. Among subagents, only the releaser may push",
+  "author": {
+    "name": "xiaolai"
+  },
+  "repository": "https://github.com/xiaolai/dev-team-for-claude",
+  "license": "ISC",
+  "keywords": [
+    "agents",
+    "team",
+    "tdd",
+    "code-review",
+    "codex",
+    "release"
+  ]
+}
