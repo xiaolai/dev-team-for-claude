@@ -55,7 +55,9 @@ release works, and the auditor's default engine.
 /dev-team:audit codex plan .dev-team/20261001-1400-rate-limit/plan.md
 ```
 
-`run` gives every task a plan, tests written first, the implementation, an audit, and at most two fix rounds. A
+`run` gives every task a plan, a validation contract, the implementation, an audit, and at most two fix rounds.
+Behavior changes require tests written first. Nonbehavioral changes can use existing checks or explicit manual
+criteria, with the tester recording why no new test is needed. A
 standard task is surveyed before it is planned. A plan is audited before tests are written when the profile's
 `Plan audit:` is `always`, or `auto` (the default) and the change is hard to reverse.
 Each handoff is saved under `.dev-team/<task>/`. That directory carries its own `.gitignore`, so git never sees it
@@ -89,3 +91,12 @@ through.
 ## License
 
 ISC
+
+## Working with other plugins
+
+Use dev-team to own the development stages, TDD Guardian to own test lanes and freshness, and cc-suite for
+cross-tool execution. Configure the profile gate to call TDD Guardian when initialized. Do not add a second
+cc-suite Stop review for a diff already audited by this workflow unless the profile explicitly requests it.
+The Claude auditor has Bash for inspection: its read-only role is an instruction, not an OS sandbox. Use the
+Codex audit engine when its enforced read-only sandbox is required. The publishing hook prevents common
+accidents; it cannot detect publishing hidden inside arbitrary scripts or aliases.

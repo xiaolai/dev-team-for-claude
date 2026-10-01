@@ -38,8 +38,11 @@ this one another way, unless they say so.
 
 ## 1. Size the task
 
-The size decides only whether the scout runs. Every task gets a plan from `_planner` and tests from `_tester`, so
-the roles stay separate at every size.
+The size decides only whether the scout runs. Every task gets a plan from `_planner` and a validation assessment from `_tester`, so
+the roles stay separate at every size. Documentation-only changes, formatting, and configuration changes
+without new behavior may use existing checks or a manual criterion instead of inventing a failing test.
+The tester records `Validation: existing-checks` or `Validation: manual`, the exact criterion and why no new
+behavioral test applies. Behavior changes always require the tests-first path.
 
 - **Small**: one or two files, no change to an interface or to stored data, the definition `_planner` uses for its
   Size field. Skip the survey.
@@ -65,14 +68,16 @@ tests with a plan whose last audit failed.
 
 ## 4. Tests first
 
-`dev-team:_tester` with the plan path and, for a standard task, the brief path → `tests.md`. Every new test must fail
-for the reason the tester quotes. If one passes already, or fails for the wrong reason, send it back to the tester
+`dev-team:_tester` with the plan path and, for a standard task, the brief path → `tests.md`. For a behavior change, every new test must fail
+for the reason the tester quotes. For a documented nonbehavioral change, accept the tester's existing-checks
+or manual validation contract and report the tests-first stage as not applicable, never as a red run. If one passes already, or fails for the wrong reason, send it back to the tester
 once; if the retry still does not give a valid red run, the gate is not met.
 
 ## 5. Implement
 
 `dev-team:_coder` with the plan path and the `tests.md` path → `code-1.md`. If the coder disputes a test, show
-the user the evidence; never let the coder change the tester's tests. The coder's report must show the profile's full
+the user the evidence; never let the coder change the tester's tests. If TDD Guardian is configured, the profile's full gate must call its gate CLI for the relevant trigger and
+use the resulting lane evidence; do not recreate freshness rules in prose. The coder's report must show the profile's full
 gate passing before the audit; a failure it could not fix means the gate is not met.
 
 ## 6. Audit

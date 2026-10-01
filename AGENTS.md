@@ -80,7 +80,8 @@ cd "$(mktemp -d)" && claude -p 'Reply ok' --plugin-dir <abs-plugin-dir> --debug-
   out of the auditor's inputs. `.dev-team/` ignores itself (`.dev-team/.gitignore` is `*`) so that reading untracked
   files cannot reach those reports, and both engines are told to skip it apart from the plan.
 - The coder never edits the tester's tests; a disputed test goes to the user. Every task size gets `_planner` and
-  `_tester`, so this holds for small tasks too; size only decides whether `_scout` runs.
+  `_tester`; the tester may specify existing/manual validation for a nonbehavioral change, without fabricating a
+  red run. Behavior changes still require tests first. Size only decides whether `_scout` runs.
 - With no profile, `_planner`, `_tester` and `_coder` put `Profile: missing` above their sections; `_scout` and
   `_auditor` report it inside their own sections; `_releaser` stops; `_consultant` carries on without one. The
   auditor's report is either its three sections or the single line `Audit failed: <error>`; `/dev-team:audit`

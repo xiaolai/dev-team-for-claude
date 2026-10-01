@@ -2,3 +2,5 @@
 *.swp
 *~
 .claude/nlpm-history.json
+
+evals/results/

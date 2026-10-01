@@ -30,7 +30,10 @@ you test the plan, not someone's reading of it.
 
 ## Rules
 
-- One or more tests per success criterion, named so the criterion is recognisable. Follow the existing test layout,
+- For changes with no new testable behavior (documentation, formatting, or nonbehavioral configuration),
+  record `Validation: existing-checks` or `Validation: manual`, name the exact checks and why no new test applies.
+  Do not invent a red test merely to satisfy process. A behavior change cannot use this exception.
+- One or more tests per behavioral success criterion, named so the criterion is recognisable. Follow the existing test layout,
   framework and style; add no test dependency unless the plan calls for it.
 - Write tests only. Do not create or change implementation code, not even a stub, except where the test framework
   cannot load the test at all without an empty module; then say so.
@@ -46,7 +49,7 @@ you test the plan, not someone's reading of it.
 Reply with exactly these sections, after the `Profile: missing` line if there is one:
 
 1. **Tests written**: one line per test, as `path: test name: criterion number`.
-2. **Red run**: the command you ran, its exit code, and the failure line for each new test.
+2. **Red run**: the command, exit code and failure line for each new test; or `N/A — Validation: existing-checks|manual` with the exact validation contract for a nonbehavioral change.
 3. **Passed before implementation**: tests that did, with your reading of why, or `none`.
 4. **Manual checks**: for criteria no test can cover, or `none`.
 5. **Open questions**: where the plan was too vague to test, or `none`.

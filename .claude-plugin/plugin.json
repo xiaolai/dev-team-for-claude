@@ -1,6 +1,6 @@
 {
   "name": "dev-team",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An agentic dev team installed per project: scout, planner, tester, coder, auditor (Claude or Codex), releaser and consultant, each with its own context, tools, model and effort, customised to the repo through a reviewed profile. Among subagents, only the releaser may push",
   "author": {
     "name": "xiaolai"
